@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  
+  <commands>
+    <command idMso="FileSave" onAction="FileNewOverride"/>        
+    <command idMso="FileSaveAs2" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsMenu" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsCurrentAs" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsWordDocx" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsWordDotx" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsWord97_2003" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsPdfOrXps" onAction="FileNewOverride"/>
+    <command idMso="FileSaveAsOtherFormat" onAction="FileNewOverride"/>
+    <command idMso="FrameSaveCurrentAs" onAction="FileNewOverride"/>  
+    <command idMso="FileSaveToDocumentManagementServer" onAction="FileNewOverride"/>  
+    <command idMso="SaveSelectionToQuickPartGallery" onAction="FileNewOverride"/>  
+    <command idMso="FileSaveAsWordOpenDocumentText" onAction="FileNewOverride"/>  
+  
+</commands>
+
+<backstage>
+       
+       <button idMso="FileSaveAs" visible="false"/>
+        <tab idMso="TabSave" visible="false"/>
+       
+    </backstage>
+</customUI>
+
