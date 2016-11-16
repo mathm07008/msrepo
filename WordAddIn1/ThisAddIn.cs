@@ -9,20 +9,10 @@ using Microsoft.Office.Tools.Word;
 using System.Windows.Forms;
 using System.Data.OleDb;
 
-namespace WordAddIn1
-{
-    public partial class ThisAddIn
-    {
+namespace WordAddIn1 {
+    public partial class ThisAddIn {
         private void ThisAddIn_Startup(object sender, System.EventArgs e) {
-            OleDbConnection cnn = new OleDbConnection();
-            cnn.ConnectionString = "Provider = sqloledb; Data Source = 192.168.0.102; Initial Catalog = QDocsPelekis; User Id = sa; Password = sup3rn0v@;";
-            string sql = "SELECT TOP 1 UserName FROM tblUser ";
-            OleDbCommand command = new OleDbCommand(sql, cnn);
-            cnn.Open();
-            OleDbDataReader reader = command.ExecuteReader();
-            while (reader.Read()) {
-                MessageBox.Show(reader[0].ToString());
-            }
+
         }
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject() {
             return new Ribbon2();

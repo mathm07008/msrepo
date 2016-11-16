@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -27,16 +28,15 @@ using Office = Microsoft.Office.Core;
 // For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
 
 
-namespace WordAddIn1
-{
+namespace WordAddIn1 { 
     [ComVisible(true)]
-    public class Ribbon2 : Office.IRibbonExtensibility
-    {
+    public class Ribbon2 : Office.IRibbonExtensibility {
         private Office.IRibbonUI ribbon;
-
-        public Ribbon2()
-        {
+        SqlConnection sqlCon = new SqlConnection();
+        public Ribbon2() {
+            
         }
+
 
         #region IRibbonExtensibility Members
 
@@ -52,11 +52,21 @@ namespace WordAddIn1
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
-            this.ribbon = ribbonUI;
+            this.ribbon = ribbonUI;            
         }
 
         public void FileNewOverride(Office.IRibbonControl control, bool isPressed) {
-            MessageBox.Show("ok");
+            string sql = "SELECT DISTINCT Descr FROM tblClient ";
+            OleDbCommand command = new OleDbCommand(sql, sqlCon.getConn());
+            sqlCon.getConn().Open();
+            OleDbDataReader reader = command.ExecuteReader();
+            Form1 form1 = new Form1();
+            
+            while (reader.Read()) {
+                form1.comboBox1.Items.Add(reader[0].ToString());
+            }
+            form1.Show();
+            sqlCon.getConn().Close();
         }
 
         #endregion
