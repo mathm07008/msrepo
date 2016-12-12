@@ -4,16 +4,25 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace WordAddIn1 {
     class SqlConnection {
-        OleDbConnection cnn = new OleDbConnection();
-        public SqlConnection () {            
-            cnn.ConnectionString = "Provider = sqloledb; Data Source = 192.168.0.102; Initial Catalog = QDocsPelekis; User Id = sa; Password = sup3rn0v@;"; 
-        }
+        MySqlConnection cnn;
+        String ConnectionString = "server=94.177.246.40; database=OddsComparisonNew; User Id = am; Password = sup3rn0v@;";
         
-        public OleDbConnection getConn() {
+        public SqlConnection()
+        {
+            cnn = new MySqlConnection(ConnectionString);            
+        }
+
+        public MySqlConnection getConnection()
+        {
             return cnn;
+        }
+        public void openConnection()
+        {
+            cnn.Open();
         }
     }
 }

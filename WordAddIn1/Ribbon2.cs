@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.IO;
@@ -8,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Office = Microsoft.Office.Core;
+
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -56,17 +59,18 @@ namespace WordAddIn1 {
         }
 
         public void FileNewOverride(Office.IRibbonControl control, bool isPressed) {
-            string sql = "SELECT DISTINCT Descr FROM tblClient ";
-            OleDbCommand command = new OleDbCommand(sql, sqlCon.getConn());
-            sqlCon.getConn().Open();
-            OleDbDataReader reader = command.ExecuteReader();
+            string query = "SELECT Code FROM vFixtures LIMIT 0,10";
+            SqlConnection con = new SqlConnection();
+            MySqlCommand cmd = new MySqlCommand(query, con.getConnection());
+            con.openConnection();
+            MySqlDataReader reader = cmd.ExecuteReader();
             Form1 form1 = new Form1();
             
             while (reader.Read()) {
                 form1.comboBox1.Items.Add(reader[0].ToString());
             }
             form1.Show();
-            sqlCon.getConn().Close();
+            sqlCon.getConnection().Close();
         }
 
         #endregion
